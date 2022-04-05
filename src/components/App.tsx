@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from 'components';
-import { Input } from './Input';
+import { InputContainer } from 'components/InputContainer';
 import { TodoItem } from './ToDoItem';
 
 const Container = styled.div`
@@ -19,10 +18,6 @@ const Contents = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-`;
-
-const InputContainer = styled.div`
-  display: flex;
 `;
 
 const TodoListContainer = styled.div`
@@ -58,14 +53,7 @@ const App = () => {
             <TodoItem key={item} label={item} onDelete={() => deleteToDo(index)} />
           ))}
         </TodoListContainer>
-        <InputContainer>
-          <Input
-            placeholder="할 일을 입력해 주세요"
-            value={toDo}
-            onChange={(text) => setToDo(text)}
-          />
-          <Button label="추가" onClick={addTodo} />
-        </InputContainer>
+        <InputContainer toDo={toDo} onChange={(text) => setToDo(text)} onAdd={addTodo} />
       </Contents>
     </Container>
   );
