@@ -27,7 +27,7 @@ const ToDoListProvider = ({ children }: Props): JSX.Element => {
 
   const deleteToDo = (index: number): void => {
     let list = [...toDoList];
-    list.slice(index, 1);
+    list.splice(index, 1);
     setToDoList(list);
   };
 

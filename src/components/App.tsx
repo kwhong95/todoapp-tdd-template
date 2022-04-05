@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { InputContainer } from 'components/InputContainer';
-import { TodoItem } from './ToDoItem';
+import { ToDoListProvider } from 'contexts';
+import { TodoList } from './ToDoList';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -20,42 +20,16 @@ const Contents = styled.div`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 `;
 
-const TodoListContainer = styled.div`
-  min-width: 350px;
-  height: 400px;
-  overflow-y: scroll;
-  border: 1px solid #bdbdbd;
-  margin-bottom: 20px;
-`;
-
 const App = () => {
-  const [toDo, setToDo] = useState('');
-  const [toDoList, setToDoList] = useState<string[]>([]);
-
-  const addTodo = (): void => {
-    if (toDo) {
-      setToDoList([...toDoList, toDo]);
-      setToDo('');
-    }
-  };
-
-  const deleteToDo = (index: number): void => {
-    let list = [...toDoList];
-    list.splice(index, 1);
-    setToDoList(list);
-  };
-
   return (
-    <Container>
-      <Contents>
-        <TodoListContainer data-testid="toDoList">
-          {toDoList.map((item, index) => (
-            <TodoItem key={item} label={item} onDelete={() => deleteToDo(index)} />
-          ))}
-        </TodoListContainer>
-        <InputContainer toDo={toDo} onChange={(text) => setToDo(text)} onAdd={addTodo} />
-      </Contents>
-    </Container>
+    <ToDoListProvider>
+      <Container>
+        <Contents>
+          <TodoList />
+          <InputContainer />
+        </Contents>
+      </Container>
+    </ToDoListProvider>
   );
 };
 
