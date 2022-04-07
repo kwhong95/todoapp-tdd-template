@@ -17,7 +17,7 @@ export const TodoList = () => {
   return (
     <Container data-testid="toDoList">
       {toDoList.map((item, idx) => (
-        <TodoItem key={item} label={item} onDelete={() => deleteToDo(idx)} />
+        <TodoItem key={item} id={idx} label={item} onDelete={() => deleteToDo(idx)} />
       ))}
     </Container>
   );
