@@ -60,4 +60,13 @@ describe('<App />', () => {
 
     expect(toDoList.childElementCount).toBe(length);
   });
+
+  it('loads localStorage data', () => {
+    localStorage.setItem('ToDoList', '["ToDo 1", "ToDo 2", "ToDo 3"]');
+    render(<App />);
+
+    expect(screen.getByText('ToDo 1')).toBeInTheDocument();
+    expect(screen.getByText('ToDo 2')).toBeInTheDocument();
+    expect(screen.getByText('ToDo 3')).toBeInTheDocument();
+  });
 });
